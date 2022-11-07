@@ -33,7 +33,7 @@ export const LoginPage = () => {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		console.log({ email, password });
+
 		dispatch(startLoginWithEmailPassword({ email, password }));
 	};
 
@@ -51,7 +51,7 @@ export const LoginPage = () => {
 				<Grid container>
 					<Grid item xs={12} sx={{ mt: 2 }}>
 						<TextField
-							label="Corre"
+							label="Correo"
 							type="email"
 							placeholder="correo@google.com"
 							fullWidth

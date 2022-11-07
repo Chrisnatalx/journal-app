@@ -16,7 +16,7 @@ import {
 	startSaveNote,
 	startUploadingFiles,
 } from "../../store/journal/thunks";
-import { ImageGalery } from "../components/ImageGalery";
+import { ImageGallery } from "../components/ImageGalery";
 import "sweetalert2/dist/sweetalert2.css";
 import { useRef } from "react";
 
@@ -50,6 +50,7 @@ export const NoteView = () => {
 	const onSaveNote = () => {
 		dispatch(startSaveNote());
 	};
+
 	const onFileInputChange = ({ target }) => {
 		if (target.files === 0) return;
 		dispatch(startUploadingFiles(target.files));
@@ -61,12 +62,12 @@ export const NoteView = () => {
 
 	return (
 		<Grid
-			className="animate__animated animate__fadeIn animate__faster"
 			container
 			direction="row"
 			justifyContent="space-between"
 			alignItems="center"
 			sx={{ mb: 1 }}
+			className="animate__animated animate__fadeIn animate__faster"
 		>
 			<Grid item>
 				<Typography fontSize={39} fontWeight="light">
@@ -81,56 +82,61 @@ export const NoteView = () => {
 					onChange={onFileInputChange}
 					style={{ display: "none" }}
 				/>
+
 				<IconButton
 					color="primary"
 					disabled={isSaving}
 					onClick={() => fileInputRef.current.click()}
 				>
-					<UploadOutlined></UploadOutlined>
+					<UploadOutlined />
 				</IconButton>
+
 				<Button
 					disabled={isSaving}
 					onClick={onSaveNote}
 					color="primary"
-					sx={{ p: 2 }}
+					sx={{ padding: 2 }}
 				>
 					<SaveOutlined sx={{ fontSize: 30, mr: 1 }} />
 					Guardar
 				</Button>
 			</Grid>
+
 			<Grid container>
 				<TextField
 					type="text"
 					variant="filled"
 					fullWidth
-					placeholder="Ingrese un titulo"
-					label="Titulo"
+					placeholder="Ingrese un título"
+					label="Título"
 					sx={{ border: "none", mb: 1 }}
 					name="title"
 					value={title}
 					onChange={onInputChange}
-				></TextField>
+				/>
+
 				<TextField
 					type="text"
 					variant="filled"
 					fullWidth
 					multiline
-					placeholder="Que sucedio en el dia de hoy?"
+					placeholder="¿Qué sucedió en el día de hoy?"
 					minRows={5}
 					name="body"
 					value={body}
 					onChange={onInputChange}
-				></TextField>
+				/>
 			</Grid>
 
 			<Grid container justifyContent="end">
-				<Button onClick={onDelete} sc={{ mt: 2 }} color="error">
-					<DeleteOutline>borrar</DeleteOutline>
+				<Button onClick={onDelete} sx={{ mt: 2 }} color="error">
+					<DeleteOutline />
+					Borrar
 				</Button>
 			</Grid>
 
-			{/* Galeria de imagenes */}
-			<ImageGalery images={note.imageUrls} />
+			{/* Image gallery */}
+			<ImageGallery images={note.imageUrls} />
 		</Grid>
 	);
 };
